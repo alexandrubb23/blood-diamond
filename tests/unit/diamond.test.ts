@@ -1,9 +1,10 @@
 import Diamond from '../../src/diamond';
+import { diamondPatterns } from '../utils';
 
 describe('Blood Diamond /', () => {
-  const createDiamond = (letter: string): string => {
+  const createDiamond = (letter: string): string[] => {
     const diamond = new Diamond(letter);
-    return diamond.create().join('\n');
+    return diamond.create();
   };
 
   describe('Letter Argument /', () => {
@@ -13,29 +14,20 @@ describe('Blood Diamond /', () => {
       });
     });
 
-    describe('if argument is A', () => {
-      it('should return A', () => {
-        const letter = 'A';
+    const letters = Object.keys(diamondPatterns);
 
-        const diamond = createDiamond(letter);
+    describe.each(letters)(`if the argument is %s`, letter => {
+      const diamond = createDiamond(letter);
 
-        expect(diamond).toEqual(letter);
-      });
-    });
+      const expected =
+        letter === 'A'
+          ? 'A'
+          : `a diamond from A to ${letter}\n${diamond.join('\n')}`;
 
-    describe('if argument is B', () => {
-      it('should return A B B A', () => {
-        const diamond = createDiamond('B');
-
-        expect(diamond.trim()).toEqual('A\nB B\n A');
-      });
-    });
-
-    describe('if argument is C', () => {
-      it('should return A B B C   C B B A', () => {
-        const diamond = createDiamond('C');
-
-        expect(diamond.trim()).toEqual('A\n B B\nC   C\n B B\n  A');
+      it(`should return ${expected}`, () => {
+        expect(diamond).toEqual(
+          expect.arrayContaining(diamondPatterns[letter])
+        );
       });
     });
   });
