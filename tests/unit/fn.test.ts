@@ -1,4 +1,4 @@
-import { addPadding, generateAlphabet } from './fn';
+import { addPadding, generateAlphabet } from '../../src/utils/fn';
 
 describe('Helper Functions /', () => {
   describe('addPadding', () => {

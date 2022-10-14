@@ -1,4 +1,4 @@
-import Diamond from './diamond';
+import Diamond from '../../src/diamond';
 
 describe('Blood Diamond /', () => {
   let letter: string;
