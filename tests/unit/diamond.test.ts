@@ -2,7 +2,7 @@ import Diamond from '../../src/diamond';
 import { diamondPatterns } from '../utils';
 
 describe('Blood Diamond /', () => {
-  const createDiamond = (letter: string): string[] => {
+  const createDiamondFromLetter = (letter: string): string[] => {
     const diamond = new Diamond(letter);
     return diamond.create();
   };
@@ -10,19 +10,22 @@ describe('Blood Diamond /', () => {
   describe('Letter Argument /', () => {
     describe('if the argument is invalid', () => {
       it('should throw an error', () => {
-        expect(() => createDiamond('a')).toThrowError('Invalid letter a.');
+        expect(() => createDiamondFromLetter('a')).toThrowError(
+          'Invalid letter a.'
+        );
       });
     });
 
     const letters = Object.keys(diamondPatterns);
+    const firstLetter = Diamond.getFirstLetter;
 
     describe.each(letters)(`if the argument is %s`, letter => {
-      const diamond = createDiamond(letter);
+      const diamond = createDiamondFromLetter(letter);
 
       const expected =
-        letter === 'A'
-          ? 'A'
-          : `a diamond from A to ${letter}\n${diamond.join('\n')}`;
+        letter === firstLetter
+          ? firstLetter
+          : `a diamond from ${firstLetter} to ${letter}\n${diamond.join('\n')}`;
 
       it(`should return ${expected}`, () => {
         expect(diamond).toEqual(

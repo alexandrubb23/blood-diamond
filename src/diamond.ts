@@ -61,6 +61,10 @@ class Diamond {
 
     return [...this.topDiamondShape, ...this.bottomDiamondShape];
   }
+
+  static get getFirstLetter() {
+    return Diamond.firstLetter;
+  }
 }
 
 export default Diamond;
