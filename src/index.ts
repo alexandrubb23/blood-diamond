@@ -2,7 +2,7 @@ import Diamond from './diamond';
 
 const arg = process.argv.pop() as string;
 const letter = arg.startsWith('letter=') ? arg.split('=')[1] : 'C';
-console.log({ letter });
+
 try {
   const diamond = new Diamond(letter);
 
