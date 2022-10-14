@@ -56,12 +56,10 @@ class Diamond {
     return this.create();
   }
 
-  create(): string {
+  create(): string[] {
     this.factoryDiamond();
 
-    const diamond = [...this.topDiamondShape, ...this.bottomDiamondShape];
-
-    return diamond.join('\n');
+    return [...this.topDiamondShape, ...this.bottomDiamondShape];
   }
 }
 

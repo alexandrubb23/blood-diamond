@@ -3,7 +3,7 @@ import Diamond from '../../src/diamond';
 describe('Blood Diamond /', () => {
   const createDiamond = (letter: string): string => {
     const diamond = new Diamond(letter);
-    return diamond.create();
+    return diamond.create().join('\n');
   };
 
   describe('Letter Argument /', () => {
