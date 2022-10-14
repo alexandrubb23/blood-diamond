@@ -1,4 +1,4 @@
-const addPadding = (n: number): string => Array(n).join(' ');
+const addPadding = (padding: number): string => Array(padding).join(' ');
 
 const generateAlphabet = (): string[] => {
   return new Array(26)

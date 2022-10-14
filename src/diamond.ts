@@ -1,11 +1,10 @@
 import { addPadding, generateAlphabet } from './utils';
 
 class Diamond {
-  private letter: string;
-  private firstLetter = 'A';
-  private firstHalf: string[] = [];
+  private topDiamondShape: string[] = [];
+  private static readonly firstLetter = 'A';
 
-  constructor(letter: string) {
+  constructor(private letter: string) {
     const alphabet = generateAlphabet();
     if (!alphabet.includes(letter))
       throw new TypeError(`Invalid letter ${letter}.`);
@@ -13,50 +12,56 @@ class Diamond {
     this.letter = letter;
   }
 
-  private getCharacterCodeFromLetter(letter: string) {
+  private addLetterToArray(letter: string = Diamond.firstLetter) {
+    let { length } = this.topDiamondShape;
+    const padding = addPadding(++length);
+
+    this.topDiamondShape.unshift(padding + letter);
+  }
+
+  private addPaddingByCharCode = (charCode: number) => {
+    const charCodeFirstLetter = this.getCharCodeFromLetter(Diamond.firstLetter);
+    const padding = (charCode - charCodeFirstLetter) * 2;
+
+    return addPadding(padding);
+  };
+
+  private getCharCodeFromLetter(letter: string) {
     return letter.charCodeAt(0);
   }
 
-  private addElementToArray(element: string) {
-    const padding = addPadding(this.firstHalf.length + 1);
-    this.firstHalf.unshift(padding + element);
+  private getNextLetterFromCharCode(charCode: number) {
+    return String.fromCharCode(charCode - 1);
   }
 
-  private addPaddingBasedOnCharacterCode = (characterCode: number): string => {
-    const spaces =
-      (characterCode - this.getCharacterCodeFromLetter(this.firstLetter)) * 2;
-
-    return addPadding(spaces);
-  };
-
-  private isFirstLetter(letter: string) {
-    return letter === this.firstLetter;
+  private get isFirstLetter() {
+    return this.letter === Diamond.firstLetter;
   }
 
-  private get secondHalf(): string[] {
-    return this.firstHalf.slice(0, -1).reverse();
+  private get bottomDiamondShape(): string[] {
+    return this.topDiamondShape.slice(0, -1).reverse();
   }
 
-  private getNextLetterFromCharacterCode(characterCode: number) {
-    return String.fromCharCode(characterCode - 1);
+  private factoryDiamond() {
+    if (this.isFirstLetter) return this.addLetterToArray();
+
+    const charCode = this.getCharCodeFromLetter(this.letter);
+    const innerPadding = this.addPaddingByCharCode(charCode);
+
+    const letter = this.letter + innerPadding + this.letter;
+    this.addLetterToArray(letter);
+
+    this.letter = this.getNextLetterFromCharCode(charCode);
+
+    return this.create();
   }
 
-  build(letter: string = this.letter, firstHalf: string[] = []): string {
-    this.firstHalf = firstHalf;
+  create(): string {
+    this.factoryDiamond();
 
-    if (this.isFirstLetter(letter)) {
-      this.addElementToArray(this.firstLetter);
-    } else {
-      const characterCode = this.getCharacterCodeFromLetter(letter);
-      const innerPadding = this.addPaddingBasedOnCharacterCode(characterCode);
+    const diamond = [...this.topDiamondShape, ...this.bottomDiamondShape];
 
-      this.addElementToArray(letter + innerPadding + letter);
-
-      const nextLetter = this.getNextLetterFromCharacterCode(characterCode);
-      return this.build(nextLetter, this.firstHalf);
-    }
-
-    return [...this.firstHalf, ...this.secondHalf].join('\n');
+    return diamond.join('\n');
   }
 }
 

@@ -1,10 +1,10 @@
 import Diamond from './diamond';
-import bloodDiamond from './diamond';
 
 describe('Blood Diamond /', () => {
   let letter: string;
   const createDiamond = (): string => {
-    return new Diamond(letter).build();
+    const diamond = new Diamond(letter);
+    return diamond.create();
   };
 
   describe('Letter Argument /', () => {
