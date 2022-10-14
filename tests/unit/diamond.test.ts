@@ -1,8 +1,7 @@
 import Diamond from '../../src/diamond';
 
 describe('Blood Diamond /', () => {
-  let letter: string;
-  const createDiamond = (): string => {
+  const createDiamond = (letter: string): string => {
     const diamond = new Diamond(letter);
     return diamond.create();
   };
@@ -10,26 +9,23 @@ describe('Blood Diamond /', () => {
   describe('Letter Argument /', () => {
     describe('if the argument is invalid', () => {
       it('should throw an error', () => {
-        letter = 'a';
-
-        expect(() => createDiamond()).toThrowError('Invalid letter a.');
+        expect(() => createDiamond('a')).toThrowError('Invalid letter a.');
       });
     });
 
     describe('if argument is A', () => {
       it('should return A', () => {
-        letter = 'A';
+        const letter = 'A';
 
-        const diamond = createDiamond();
+        const diamond = createDiamond(letter);
 
-        expect(diamond).toEqual('A');
+        expect(diamond).toEqual(letter);
       });
     });
 
     describe('if argument is B', () => {
       it('should return A B B A', () => {
-        letter = 'B';
-        const diamond = createDiamond();
+        const diamond = createDiamond('B');
 
         expect(diamond.trim()).toEqual('A\nB B\n A');
       });
@@ -37,9 +33,7 @@ describe('Blood Diamond /', () => {
 
     describe('if argument is C', () => {
       it('should return A B B C   C B B A', () => {
-        letter = 'C';
-
-        const diamond = createDiamond();
+        const diamond = createDiamond('C');
 
         expect(diamond.trim()).toEqual('A\n B B\nC   C\n B B\n  A');
       });
