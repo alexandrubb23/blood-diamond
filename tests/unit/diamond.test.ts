@@ -28,9 +28,10 @@ describe('Blood Diamond /', () => {
           : `a diamond from ${firstLetter} to ${letter}\n${diamond.join('\n')}`;
 
       it(`should return ${expected}`, () => {
-        expect(diamond).toEqual(
-          expect.arrayContaining(diamondPatterns[letter])
-        );
+        const pattern = diamondPatterns[letter];
+
+        expect(diamond).toHaveLength(pattern.length);
+        expect(diamond).toEqual(expect.arrayContaining(pattern));
       });
     });
   });
