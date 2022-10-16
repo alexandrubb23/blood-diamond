@@ -19,7 +19,7 @@ class Diamond {
 
   private sliceData() {
     const index = this.indexOf();
-    return this.sliceDataAndReverse(this.data, index);
+    return this.sliceDataAndReverseOrder(this.data, index);
   }
 
   private addPaddingInBetweenChars(elementIndex: number) {
@@ -56,12 +56,18 @@ class Diamond {
   }
 
   private diamond() {
-    const bottomDiamondShape = this.sliceDataAndReverse(this.diamondShape, -1);
+    const bottomDiamondShape = this.sliceDataAndReverseOrder(
+      this.diamondShape,
+      -1
+    );
 
     return [...this.diamondShape, ...bottomDiamondShape];
   }
 
-  private sliceDataAndReverse(data: string[], endPosition: number | undefined) {
+  private sliceDataAndReverseOrder(
+    data: string[],
+    endPosition: number | undefined
+  ) {
     return data.slice(0, endPosition).reverse();
   }
 

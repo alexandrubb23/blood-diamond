@@ -147,7 +147,7 @@ Will generate a 🔶 (diamond) with 27 different special-chars.
 Expected output:
 
 ```
-        !
+                          !
                          # #
                         $   $
                        %     %
