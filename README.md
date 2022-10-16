@@ -202,7 +202,7 @@ Expected output:
                           !
 ```
 
-Or creade different diamonds in on go!
+Or create different diamonds in on go!
 
 ```bash
 npm run create-numbered-diamond -- number=9 && npm run create-alphabetical-diamond -- letter=I && npm run create-pawed-diamond && npm run create-special-chars-diamond
