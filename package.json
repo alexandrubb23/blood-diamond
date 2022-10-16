@@ -2,6 +2,10 @@
   "name": "blood-diamond",
   "scripts": {
     "create-diamond": "ts-node src/index.ts",
+    "create-numbered-diamond": "ts-node src/numberedDiamond.ts",
+    "create-alphabetical-diamond": "ts-node src/alphabeticalDiamond.ts",
+    "create-pawed-diamond": "ts-node src/pawedDiamond.ts",
+    "create-special-chars-diamond": "ts-node src/specialCharsDiamond.ts",
     "test": "jest --verbose"
   },
   "type": "commonjs",
