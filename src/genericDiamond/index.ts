@@ -4,7 +4,7 @@ const factoryDiamond = (char: string, data: string[]) => {
   try {
     const diamond = new Diamond(char, data);
 
-    console.log(diamond.create().join('\n'));
+    console.log(diamond.factory().join('\n'));
   } catch (error) {
     if (error instanceof TypeError) console.log(error.message);
   }

@@ -8,7 +8,7 @@ class Diamond {
   constructor(private char: string, private data: string[]) {
     if (!data.includes(char))
       throw new TypeError(
-        `Char ${char} is not allowed. Max char is ${data.at(-1)}`
+        `Char ${char} is not allowed. Max char is ${this.getLastElementFromData}`
       );
 
     this.char = char;
@@ -39,7 +39,7 @@ class Diamond {
     this.diamondShape.unshift(padding + char);
   }
 
-  create(elementIndex = 0): string[] {
+  factory(elementIndex = 0): string[] {
     this.char = this.collection[elementIndex];
 
     if (this.isLastElementFromCollection(elementIndex)) {
@@ -52,7 +52,7 @@ class Diamond {
 
     this.addCharAtTheBeginingOfArray(paddedChar);
 
-    return this.create(elementIndex + 1);
+    return this.factory(elementIndex + 1);
   }
 
   private diamond() {
@@ -86,6 +86,10 @@ class Diamond {
 
   private get getLastIndexFromCollection() {
     return this.countCollection - 1;
+  }
+
+  private get getLastElementFromData() {
+    return this.data.at(-1);
   }
 }
 
