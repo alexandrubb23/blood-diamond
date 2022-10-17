@@ -1,11 +1,13 @@
 import { addPadding } from '../utils';
 
-class Diamond {
-  private collection: string[];
-  private countCollection: number;
-  private diamondShape: string[] = [];
+type StringArray = string[];
 
-  constructor(private char: string, private data: string[]) {
+class Diamond {
+  private collection: StringArray;
+  private countCollection: number;
+  private diamondShape: StringArray = [];
+
+  constructor(private char: string, private data: StringArray) {
     if (!data.includes(char))
       throw new TypeError(
         `Char ${char} is not allowed. Max char is ${this.getLastElementFromData}`
@@ -13,6 +15,7 @@ class Diamond {
 
     this.char = char;
     this.data = data;
+
     this.collection = this.sliceData();
     this.countCollection = this.collection.length;
   }
@@ -23,12 +26,12 @@ class Diamond {
   }
 
   private addPaddingInBetweenChars(elementIndex: number) {
-    const padding = this.calculateDistanceFromLastElement(elementIndex);
+    const padding = this.getDistanceBetweenLastAndCurrentIndex(elementIndex);
 
     return this.char + addPadding(padding) + this.char;
   }
 
-  private calculateDistanceFromLastElement(elementIndex: number) {
+  private getDistanceBetweenLastAndCurrentIndex(elementIndex: number) {
     return (this.getLastIndexFromCollection - elementIndex) * 2;
   }
 
@@ -39,7 +42,7 @@ class Diamond {
     this.diamondShape.unshift(padding + char);
   }
 
-  factory(elementIndex = 0): string[] {
+  factory(elementIndex = 0): StringArray {
     this.char = this.collection[elementIndex];
 
     if (this.isLastElementFromCollection(elementIndex)) {
@@ -64,11 +67,8 @@ class Diamond {
     return [...this.diamondShape, ...bottomDiamondShape];
   }
 
-  private sliceDataAndReverseOrder(
-    data: string[],
-    endPosition: number | undefined
-  ) {
-    return data.slice(0, endPosition).reverse();
+  private sliceDataAndReverseOrder(data: StringArray, end: number | undefined) {
+    return data.slice(0, end).reverse();
   }
 
   private indexOf() {
@@ -96,6 +96,10 @@ class Diamond {
 
   private get getLastElementFromData() {
     return this.data.at(-1);
+  }
+
+  get getLastElementFromCollection() {
+    return this.collection.at(-1);
   }
 }
 
