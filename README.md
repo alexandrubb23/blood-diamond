@@ -46,6 +46,8 @@ I've created a new generic "Diamond" class which accepts a string array (string[
 
 Unfortunately, I couldn't find time in order to implement tests 😞 Sunday evening, family, etc. But I will do it in the next few days 😉
 
+❗❗Update❗❗ The tests was implemented (dynamic vs individual).
+
 # Numbered Diamond
 
 ```bash
